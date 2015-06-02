@@ -1,0 +1,88 @@
+﻿<UserControl x:Class="ecman.Views.ProductsTabView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="1000">
+    <Grid>
+        <controls:MetroAnimatedTabControl>
+            <controls:MetroTabItem>
+                <controls:MetroTabItem.HeaderTemplate>
+                    <ItemContainerTemplate>
+                        <TextBlock FontSize="18" Margin="5">szukaj produktu</TextBlock>
+                    </ItemContainerTemplate>
+                </controls:MetroTabItem.HeaderTemplate>
+                
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="135"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    
+                    <GroupBox Header="Kryteria wyszukiwania:" Grid.Row="0">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40"></RowDefinition>
+                                <RowDefinition Height="40"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="65"></ColumnDefinition>
+                                <ColumnDefinition Width="200"></ColumnDefinition>
+                                <ColumnDefinition Width="65"></ColumnDefinition>
+                                <ColumnDefinition Width="200"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Margin="5" Grid.Column="0" Grid.Row="0">Nazwa:</TextBlock>
+                            <TextBox Grid.Column="1" Grid.Row="0" Margin="5" Width="180"></TextBox>
+                            
+                            <TextBlock Grid.Column="2" Grid.Row="0" Margin="5">Kategoria:</TextBlock>
+                            <ComboBox Grid.Column="3" Grid.Row="0" Width="180" Margin="5"
+                                  controls:TextBoxHelper.ClearTextButton="True"
+                                  
+                                  SelectedIndex="0"
+                                  IsEditable="True" />
+                            
+                            <TextBlock Grid.Column="0" Grid.Row="1" Margin="5">Producent:</TextBlock>
+                            <ComboBox Grid.Column="1" Grid.Row="1" Width="180"
+                                  controls:TextBoxHelper.ClearTextButton="True"
+                                  Margin="5"
+                                  SelectedIndex="0"
+                                  IsEditable="True" />
+                            
+                            <TextBlock Grid.Column="2" Grid.Row="1" Margin="5">Dostawca:</TextBlock>
+                            <ComboBox Grid.Column="3" Grid.Row="1" Width="180"
+                                  controls:TextBoxHelper.ClearTextButton="True"
+                                  Margin="5"
+                                  SelectedIndex="0"
+                                  IsEditable="True" />
+                        </Grid>
+                        
+                    </GroupBox>
+                    
+                </Grid>
+                
+            </controls:MetroTabItem>
+
+            <controls:MetroTabItem>
+                <controls:MetroTabItem.HeaderTemplate>
+                    <ItemContainerTemplate>
+                        <TextBlock FontSize="18" Margin="5">dodaj produkt</TextBlock>
+                    </ItemContainerTemplate>
+                </controls:MetroTabItem.HeaderTemplate>
+            </controls:MetroTabItem>
+
+            <controls:MetroTabItem>
+                <controls:MetroTabItem.HeaderTemplate>
+                    <ItemContainerTemplate>
+                        <TextBlock FontSize="18" Margin="5">zarządzaj kategoriami</TextBlock>
+                    </ItemContainerTemplate>
+                </controls:MetroTabItem.HeaderTemplate>
+            </controls:MetroTabItem>
+        </controls:MetroAnimatedTabControl>
+    </Grid>
+</UserControl>

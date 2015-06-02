@@ -1,0 +1,14 @@
+<controls:MetroWindow x:Class="ecman.Views.ShellView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        GlowBrush="{DynamicResource AccentColorBrush}"
+        WindowStartupLocation="CenterScreen"
+                      Width="1050" Height="700">
+
+    <Grid Margin="10">
+        <controls:MetroAnimatedTabControl x:Name="Items">
+        </controls:MetroAnimatedTabControl>
+    </Grid>
+
+</controls:MetroWindow>
