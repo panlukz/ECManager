@@ -1,9 +1,14 @@
-﻿namespace ecman.ViewModels
+﻿using DataAccess;
+
+namespace ecman.ViewModels
 {
     public class ProductsTabViewModel : TabViewModelBase
     {
-        public ProductsTabViewModel()
+        private IData dataContext;
+
+        public ProductsTabViewModel(IData data)
         {
+            this.dataContext = data;
             this.DisplayName = "Produkty";
         }
     }

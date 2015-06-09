@@ -18,13 +18,15 @@
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="135"></RowDefinition>
+                        <RowDefinition></RowDefinition>
                     </Grid.RowDefinitions>
                     
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
                     
-                    <GroupBox Header="Kryteria wyszukiwania:" Grid.Row="0">
+                    <GroupBox Header="Kryteria wyszukiwania:" Grid.Row="0" Grid.ColumnSpan="2">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="40"></RowDefinition>
@@ -64,6 +66,14 @@
                         
                     </GroupBox>
                     
+                    <GroupBox Header="Lista produktów:" Grid.Column="0" Grid.Row="1">
+                        
+                    </GroupBox>
+                    
+                    <GroupBox Header="Szczegóły wybranego produktu:" Grid.Column="1" Grid.Row="1">
+                        
+                    </GroupBox>
+                    
                 </Grid>
                 
             </controls:MetroTabItem>
@@ -71,18 +81,124 @@
             <controls:MetroTabItem>
                 <controls:MetroTabItem.HeaderTemplate>
                     <ItemContainerTemplate>
-                        <TextBlock FontSize="18" Margin="5">dodaj produkt</TextBlock>
+                        <TextBlock FontSize="18" Margin="5">zarządzaj produktami i kategoriami</TextBlock>
                     </ItemContainerTemplate>
                 </controls:MetroTabItem.HeaderTemplate>
-            </controls:MetroTabItem>
+                
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="80" />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    
+                    <GroupBox Header="Wyszukaj produkt:" Grid.Row="0">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                            <Label>Wprowadź numer referencyjny produktu:</Label>
+                            <TextBox Margin="10,0,5,0" Width="200"></TextBox>
+                            <Button x:Name="GetProductById" Margin="0,0,10,0">Wyszukaj</Button>
+                            <Label>lub dodaj do bazy nowy produkt:</Label>
+                            <Button x:Name="AddProduct">Dodaj nowy produkt</Button>
+                        </StackPanel>
+                    </GroupBox>
+                    
+                    <GroupBox Header="Szczegóły produktu:" Grid.Row="1">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="70"/>
+                                <RowDefinition Height="30"/>
+                                <RowDefinition Height="45"/>
+                            </Grid.RowDefinitions>
+                            
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="200"/>
+                                <ColumnDefinition Width="120"/>
+                                <ColumnDefinition Width="200"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            <Label Grid.Row="0" Grid.Column="0">Nazwa produktu:</Label>
+                            <TextBox Grid.Row="0" Grid.Column="1"></TextBox>
+                            
+                            <Label Grid.Row="1" Grid.Column="0">Opis produktu:</Label>
+                            <TextBox Grid.Row="1" Grid.Column="1" Height="60"></TextBox>
+                            
+                            <Label Grid.Row="2" Grid.Column="0">Cena produktu:</Label>
+                            <TextBox Grid.Row="2" Grid.Column="1"></TextBox>
+                            
+                            <Label Grid.Row="0" Grid.Column="2">Kategoria produktu:</Label>
+                            <ComboBox Grid.Row="0" Grid.Column="3" Height="25"></ComboBox>
+                            
+                            <Label Grid.Row="1" Grid.Column="2">Producent:</Label>
+                            <ComboBox Grid.Row="1" Grid.Column="3" Margin="0,5,0,40"></ComboBox>
+                            
+                            <Label Grid.Row="2" Grid.Column="2">Dostawca:</Label>
+                            <ComboBox Grid.Row="2" Grid.Column="3" Height="25"></ComboBox>
+                            
+                            <Button x:Name="UpdateProduct" Grid.Row="3" Grid.ColumnSpan="4" Width="200" Margin="10,10">Zapisz edytowany produkt</Button>
+                            
+                        </Grid>
+                        
+                    </GroupBox>
+                    
+                    <GroupBox Grid.Row="2" Header="Zarządzaj kategoriami:">
 
-            <controls:MetroTabItem>
-                <controls:MetroTabItem.HeaderTemplate>
-                    <ItemContainerTemplate>
-                        <TextBlock FontSize="18" Margin="5">zarządzaj kategoriami</TextBlock>
-                    </ItemContainerTemplate>
-                </controls:MetroTabItem.HeaderTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+
+                            <GroupBox Grid.Column="0" Header="Lista kategorii:">
+                                <ListView 
+                      Margin="0, 10, 0, 0"
+                      BorderThickness="0"
+                      ItemsSource="{Binding Path=Suppliers}"
+                      SelectedIndex="0" SelectionMode="Single" SelectedItem="{Binding Path=EditSupplier}">
+                                    <ListView.ContextMenu>
+                                        <ContextMenu>
+                                            <MenuItem Header="Usuń dostawcę..."></MenuItem>
+                                        </ContextMenu>
+
+                                    </ListView.ContextMenu>
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn DisplayMemberBinding="{Binding Id}"
+                                        Header="Id"
+                                        Width="50"/>
+                                            <GridViewColumn DisplayMemberBinding="{Binding Name}"
+                                        Header="Nazwa kategorii"
+                                        Width="300"/>
+                                         
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                            </GroupBox>
+
+
+
+                            <GroupBox Grid.Column="1" Header="Szczegóły kategorii">
+
+                                <StackPanel Orientation="Vertical">
+                                    <Label>Nazwa:</Label>
+                                    <TextBox Text="{Binding Path=EditSupplier.Name}"></TextBox>
+
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <Button x:Name="AddNewCategory" Margin="10,5">Dodaj nową kategorię</Button>
+                                        <Button x:Name="UpdateCategory" Margin="10,5">Zapisz zmiany</Button>
+                                    </StackPanel>
+                                </StackPanel>
+                            </GroupBox>
+
+                        </Grid>
+
+                    </GroupBox>
+                    
+                </Grid>
+                
             </controls:MetroTabItem>
+            
         </controls:MetroAnimatedTabControl>
     </Grid>
 </UserControl>

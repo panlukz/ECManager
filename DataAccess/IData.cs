@@ -14,7 +14,14 @@ namespace DataAccess
 
         ICollection<Supplier> GetAllSuppliers();
 
-        ICollection<Supply> GetAllSupplies(); 
+        ICollection<Supply> GetAllSupplies();
+
+        ICollection<Category> GetAllCategories();
+
+        Product GetProductById(int productId);
+
+        void UpdateProduct(Product newProduct);
+        void AddProduct(Product product);
 
         void AddSupply(Supply supply);
         void DeleteSupply(Supply supply);
