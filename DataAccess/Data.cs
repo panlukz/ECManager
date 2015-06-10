@@ -41,13 +41,38 @@ namespace DataAccess
             return context.Categories.ToList();
         }
 
-        public ICollection<Product> GetProducts(string name = "", int categoryId = 0, int producerId = 0, int supplierId = 0)
+        public ICollection<Producer> GetAllProducers()
         {
-            return context.Products.Where(p => (!String.IsNullOrWhiteSpace(p.Name) && p.Name.Contains(name)) || 
-                                                (p.CategoryId != 0 && p.CategoryId == categoryId) ||
-                                                (p.ProducerId != 0 && p.ProducerId == producerId) ||
-                                                (p.SupplierId != 0 && p.SupplierId == supplierId)
-                                                ).ToList();
+            return context.Producers.ToList();
+        }
+
+        public ICollection<Product> GetProducts(string name = "", string category = "", string producer = "", string supplier = "")
+        {
+
+            var productsQuery = context.Products.AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(name))
+            {
+                productsQuery = productsQuery.Where(p => p.Name.ToLower().Contains(name.ToLower()));
+            }
+
+            if (!string.IsNullOrWhiteSpace(category))
+            {
+                productsQuery = productsQuery.Where(p => p.Category.Name.ToLower().Contains(category.ToLower()));
+            }
+
+            if (!string.IsNullOrWhiteSpace(producer))
+            {
+                productsQuery = productsQuery.Where(p => p.Producer.Name.ToLower().Contains(producer.ToLower()));
+            }
+
+            if (!string.IsNullOrWhiteSpace(supplier))
+            {
+                productsQuery = productsQuery.Where(p => p.Supplier.Name.ToLower().Contains(supplier.ToLower()));
+            }
+
+            return productsQuery.ToList();
+
         }
 
         public Product GetProductById(int productId)
@@ -68,6 +93,21 @@ namespace DataAccess
 
             context.SaveChanges();
 
+        }
+
+        public void AddCategory(Category category)
+        {
+            context.Categories.Add(category);
+            context.SaveChanges();
+        }
+
+        public void UpdateCategory(Category category)
+        {
+            Category oldCategory = context.Categories.Single(c => c.Id == category.Id);
+
+            oldCategory.Name = category.Name;
+
+            context.SaveChanges();
         }
 
         public void AddProduct(Product product)

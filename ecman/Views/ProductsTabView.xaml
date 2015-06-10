@@ -38,14 +38,18 @@
                                 <ColumnDefinition Width="200"></ColumnDefinition>
                                 <ColumnDefinition Width="65"></ColumnDefinition>
                                 <ColumnDefinition Width="200"></ColumnDefinition>
+                                <ColumnDefinition Width="130" />
                             </Grid.ColumnDefinitions>
                             <TextBlock Margin="5" Grid.Column="0" Grid.Row="0">Nazwa:</TextBlock>
-                            <TextBox Grid.Column="1" Grid.Row="0" Margin="5" Width="180"></TextBox>
+                            <TextBox Grid.Column="1" Grid.Row="0" Margin="5" Width="180"
+                                     Text="{Binding Path=QueryProductName, Mode=OneWayToSource}"></TextBox>
                             
                             <TextBlock Grid.Column="2" Grid.Row="0" Margin="5">Kategoria:</TextBlock>
                             <ComboBox Grid.Column="3" Grid.Row="0" Width="180" Margin="5"
                                   controls:TextBoxHelper.ClearTextButton="True"
-                                  
+                                  ItemsSource="{Binding Path=Categories, Mode=OneWay}"
+                                      DisplayMemberPath="Name"
+                                      Text="{Binding Path=QueryProductCategory, Mode=OneWayToSource}"
                                   SelectedIndex="0"
                                   IsEditable="True" />
                             
@@ -54,24 +58,79 @@
                                   controls:TextBoxHelper.ClearTextButton="True"
                                   Margin="5"
                                   SelectedIndex="0"
-                                  IsEditable="True" />
+                                  IsEditable="True" 
+                                      ItemsSource="{Binding Path=Producers, Mode=OneWay}"
+                                      DisplayMemberPath="Name"
+                                      Text="{Binding Path=QueryProductProducer, Mode=OneWayToSource}"
+                                      />
                             
                             <TextBlock Grid.Column="2" Grid.Row="1" Margin="5">Dostawca:</TextBlock>
                             <ComboBox Grid.Column="3" Grid.Row="1" Width="180"
                                   controls:TextBoxHelper.ClearTextButton="True"
                                   Margin="5"
                                   SelectedIndex="0"
-                                  IsEditable="True" />
+                                  IsEditable="True" 
+                                      ItemsSource="{Binding Path=Suppliers, Mode=OneWay}"
+                                      DisplayMemberPath="Name"
+                                      Text="{Binding Path=QueryProductSupplier, Mode=OneWayToSource}"/>
+                            
+                            <Button x:Name="SearchProducts" Grid.Row="0" Grid.RowSpan="2" Grid.Column="4" >Wyszukaj produkty</Button>
                         </Grid>
                         
                     </GroupBox>
                     
                     <GroupBox Header="Lista produktów:" Grid.Column="0" Grid.Row="1">
-                        
+                        <ListView 
+                      Margin="0, 10, 0, 0"
+                      BorderThickness="0"
+                      ItemsSource="{Binding Path=ProductsFromQuery}"
+                      SelectedIndex="0" SelectionMode="Single" SelectedItem="{Binding Path=SelectedProductFromQuery}">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Id}"
+                                        Header="Id"
+                                        Width="50"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Name}"
+                                        Header="Nazwa"
+                                        Width="150"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Category.Name}"
+                                        Header="Kategoria"
+                                        Width="100"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Producer.Name}"
+                                        Header="Producent"
+                                        Width="100"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Supplier.Name}"
+                                        Header="Dostawca"
+                                        Width="100"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+
                     </GroupBox>
                     
                     <GroupBox Header="Szczegóły wybranego produktu:" Grid.Column="1" Grid.Row="1">
-                        
+                        <StackPanel Orientation="Vertical">
+
+                            <Label>Nazwa produktu:</Label>
+                            <TextBox Text="{Binding Path=SelectedProductFromQuery.Name, Mode=OneWay}"></TextBox>
+
+                            <Label>Opis produktu:</Label>
+                            <TextBox Height="60" Text="{Binding Path=SelectedProductFromQuery.Description, Mode=OneWay}"></TextBox>
+
+                            <Label>Cena produktu:</Label>
+                            <TextBox Text="{Binding Path=SelectedProductFromQuery.Price, Mode=OneWay}"></TextBox>
+
+                            <Label>Kategoria produktu:</Label>
+                            <TextBox Height="25" Text="{Binding Path=SelectedProductFromQuery.Category.Name, Mode=OneWay}"></TextBox>
+
+                            <Label>Producent:</Label>
+                            <TextBox Margin="0,5,0,40" Text="{Binding Path=SelectedProductFromQuery.Producer.Name, Mode=OneWay}"></TextBox>
+
+                            <Label>Dostawca:</Label>
+                            <TextBox Height="25" Text="{Binding Path=SelectedProductFromQuery.Supplier.Name, Mode=OneWay}"></TextBox>
+
+
+                        </StackPanel>
                     </GroupBox>
                     
                 </Grid>
@@ -95,7 +154,7 @@
                     <GroupBox Header="Wyszukaj produkt:" Grid.Row="0">
                         <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
                             <Label>Wprowadź numer referencyjny produktu:</Label>
-                            <TextBox Margin="10,0,5,0" Width="200"></TextBox>
+                            <TextBox Margin="10,0,5,0" Width="200" Text="{Binding Path=EditProductId}"></TextBox>
                             <Button x:Name="GetProductById" Margin="0,0,10,0">Wyszukaj</Button>
                             <Label>lub dodaj do bazy nowy produkt:</Label>
                             <Button x:Name="AddProduct">Dodaj nowy produkt</Button>
@@ -119,22 +178,22 @@
                             </Grid.ColumnDefinitions>
                             
                             <Label Grid.Row="0" Grid.Column="0">Nazwa produktu:</Label>
-                            <TextBox Grid.Row="0" Grid.Column="1"></TextBox>
+                            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding Path=EditProduct.Name}"></TextBox>
                             
                             <Label Grid.Row="1" Grid.Column="0">Opis produktu:</Label>
-                            <TextBox Grid.Row="1" Grid.Column="1" Height="60"></TextBox>
+                            <TextBox Grid.Row="1" Grid.Column="1" Height="60" Text="{Binding Path=EditProduct.Description}"></TextBox>
                             
                             <Label Grid.Row="2" Grid.Column="0">Cena produktu:</Label>
-                            <TextBox Grid.Row="2" Grid.Column="1"></TextBox>
+                            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding Path=EditProduct.Price}"></TextBox>
                             
                             <Label Grid.Row="0" Grid.Column="2">Kategoria produktu:</Label>
-                            <ComboBox Grid.Row="0" Grid.Column="3" Height="25"></ComboBox>
+                            <ComboBox Grid.Row="0" Grid.Column="3" Height="25" ItemsSource="{Binding Path=Categories, Mode=TwoWay}" DisplayMemberPath="Name" SelectedItem="{Binding Path=EditProduct.Category, Mode=TwoWay}"></ComboBox>
                             
                             <Label Grid.Row="1" Grid.Column="2">Producent:</Label>
-                            <ComboBox Grid.Row="1" Grid.Column="3" Margin="0,5,0,40"></ComboBox>
+                            <ComboBox Grid.Row="1" Grid.Column="3" Margin="0,5,0,40" ItemsSource="{Binding Path=Producers, Mode=TwoWay}" DisplayMemberPath="Name" SelectedItem="{Binding Path=EditProduct.Producer, Mode=TwoWay}"></ComboBox>
                             
                             <Label Grid.Row="2" Grid.Column="2">Dostawca:</Label>
-                            <ComboBox Grid.Row="2" Grid.Column="3" Height="25"></ComboBox>
+                            <ComboBox Grid.Row="2" Grid.Column="3" Height="25" ItemsSource="{Binding Path=Suppliers, Mode=TwoWay}" DisplayMemberPath="Name" SelectedItem="{Binding Path=EditProduct.Supplier, Mode=TwoWay}"></ComboBox>
                             
                             <Button x:Name="UpdateProduct" Grid.Row="3" Grid.ColumnSpan="4" Width="200" Margin="10,10">Zapisz edytowany produkt</Button>
                             
@@ -154,11 +213,11 @@
                                 <ListView 
                       Margin="0, 10, 0, 0"
                       BorderThickness="0"
-                      ItemsSource="{Binding Path=Suppliers}"
-                      SelectedIndex="0" SelectionMode="Single" SelectedItem="{Binding Path=EditSupplier}">
+                      ItemsSource="{Binding Path=Categories}"
+                      SelectedIndex="0" SelectionMode="Single" SelectedItem="{Binding Path=EditCategory}">
                                     <ListView.ContextMenu>
                                         <ContextMenu>
-                                            <MenuItem Header="Usuń dostawcę..."></MenuItem>
+                                            <MenuItem Header="Usuń kategorię..."></MenuItem>
                                         </ContextMenu>
 
                                     </ListView.ContextMenu>
@@ -182,7 +241,7 @@
 
                                 <StackPanel Orientation="Vertical">
                                     <Label>Nazwa:</Label>
-                                    <TextBox Text="{Binding Path=EditSupplier.Name}"></TextBox>
+                                    <TextBox Text="{Binding Path=EditCategory.Name}"></TextBox>
 
                                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                                         <Button x:Name="AddNewCategory" Margin="10,5">Dodaj nową kategorię</Button>

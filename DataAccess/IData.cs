@@ -18,6 +18,15 @@ namespace DataAccess
 
         ICollection<Category> GetAllCategories();
 
+        ICollection<Product> GetProducts(string name = "", string category = "", string producer = "",
+            string supplier = "");
+
+        ICollection<Producer> GetAllProducers();
+
+        void AddCategory(Category category);
+
+        void UpdateCategory(Category category);
+
         Product GetProductById(int productId);
 
         void UpdateProduct(Product newProduct);

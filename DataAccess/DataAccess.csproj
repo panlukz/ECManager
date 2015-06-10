@@ -85,6 +85,8 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Category.cs" />
+    <Compile Include="Model\Customer.cs" />
+    <Compile Include="Model\Order.cs" />
     <Compile Include="Model\Producer.cs" />
     <Compile Include="Model\Product.cs" />
     <Compile Include="Model\Supplier.cs" />
