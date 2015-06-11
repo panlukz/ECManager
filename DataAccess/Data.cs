@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -101,6 +103,21 @@ namespace DataAccess
             context.SaveChanges();
         }
 
+        public void DeleteCategory(Category category)
+        {
+            context.Categories.Remove(category);
+            try
+            {
+                context.SaveChanges();
+            }
+            catch (DbUpdateException ex)
+            {
+                RollBackDbChanges();
+
+                throw new Exception();
+            }
+        }
+
         public void UpdateCategory(Category category)
         {
             Category oldCategory = context.Categories.Single(c => c.Id == category.Id);
@@ -114,6 +131,21 @@ namespace DataAccess
         {
             context.Products.Add(product);
             context.SaveChanges();
+        }
+
+        public void DeleteProduct(Product product)
+        {
+            context.Products.Remove(product);
+            try
+            {
+                context.SaveChanges();
+            }
+            catch (DbUpdateException ex)
+            {
+                RollBackDbChanges();
+
+                throw new Exception();
+            }
         }
 
 
@@ -144,8 +176,16 @@ namespace DataAccess
         public void DeleteSupplier(Supplier supplier)
         {
             context.Suppliers.Remove(supplier);
-
-            context.SaveChanges();
+            try
+            {
+                context.SaveChanges();
+            }
+            catch (DbUpdateException ex)
+            {
+                RollBackDbChanges();
+                
+                throw new Exception();
+            }
         }
 
         public void AddSupplier(Supplier editSupplier)
@@ -154,5 +194,29 @@ namespace DataAccess
 
             context.SaveChanges();
         }
+
+
+        public void RollBackDbChanges()
+        {
+            var changedEntries = context.ChangeTracker.Entries().Where(x => x.State != EntityState.Unchanged).ToList();
+
+            foreach (var entry in changedEntries.Where(x => x.State == EntityState.Modified))
+            {
+                entry.CurrentValues.SetValues(entry.OriginalValues);
+                entry.State = EntityState.Unchanged;
+            }
+
+            foreach (var entry in changedEntries.Where(x => x.State == EntityState.Added))
+            {
+                entry.State = EntityState.Detached;
+            }
+
+            foreach (var entry in changedEntries.Where(x => x.State == EntityState.Deleted))
+            {
+                entry.State = EntityState.Unchanged;
+            }
+
+        }
+
     }
 }

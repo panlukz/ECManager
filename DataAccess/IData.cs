@@ -25,12 +25,15 @@ namespace DataAccess
 
         void AddCategory(Category category);
 
+        void DeleteCategory(Category category);
+
         void UpdateCategory(Category category);
 
         Product GetProductById(int productId);
 
         void UpdateProduct(Product newProduct);
         void AddProduct(Product product);
+        void DeleteProduct(Product product);
 
         void AddSupply(Supply supply);
         void DeleteSupply(Supply supply);

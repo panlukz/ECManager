@@ -32,6 +32,8 @@ namespace DataAccess.Model
 
         public virtual ICollection<Supply> Supply { get; set; }
 
+        public virtual ICollection<Order> Order { get; set; } 
+
 
     }
 }

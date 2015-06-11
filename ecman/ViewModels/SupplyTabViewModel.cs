@@ -6,6 +6,7 @@ using System.Windows.Data;
 using Caliburn.Micro;
 using DataAccess;
 using DataAccess.Model;
+using MahApps.Metro.Controls.Dialogs;
 
 namespace ecman.ViewModels
 {
@@ -19,6 +20,7 @@ namespace ecman.ViewModels
         private Supply selectedSupply;
         private BindableCollection<Supply> supplies;
         private Supplier editSupplier;
+        private BindableCollection<Supplier> suppliers;
 
 
 
@@ -34,7 +36,20 @@ namespace ecman.ViewModels
             this.suppliesListView = new  ListCollectionView(Supplies);
         }
 
-        public BindableCollection<Supplier> Suppliers { get; private set; }
+       
+
+        
+
+        public BindableCollection<Supplier> Suppliers
+        {
+            get { return suppliers; }
+            set
+            {
+                suppliers = value;
+                NotifyOfPropertyChange(() => Suppliers);
+            }
+        }
+        
 
         public BindableCollection<Supply> Supplies
         {
@@ -252,26 +267,63 @@ namespace ecman.ViewModels
 
             dataContext.AddSupply(newSupply);
             Supplies = new BindableCollection<Supply>(dataContext.GetAllSupplies());
-            
+            //dirty hack to refresh supply list filtered by selected date
+            SearchSupplyDate1 = SearchSupplyDate1;
+            SearchSupplyDate2 = SearchSupplyDate2;
+
+            DialogService.ShowMessage("Dodanie dostawy od odstawcy " + newSupply.Supplier.Name + " zakończono sukcesem!",
+                            "Dodano dostawę", MessageDialogStyle.Affirmative);
             
         }
 
-        public void DeleteSupply()
+        public async void DeleteSupply()
         {
             if (SelectedSupply != null)
             {
-                dataContext.DeleteSupply(SelectedSupply);
-                Supplies = new BindableCollection<Supply>(dataContext.GetAllSupplies());
+
+                MessageDialogResult result =
+                    await
+                        DialogService.ShowMessage(
+                            "Czy jesteś pewny że chcesz usunąć dostawę od dostawcy " + SelectedSupply.Supplier.Name +
+                            " z dnia " + SelectedSupply.DeliveryDate + "? Cofnięcie zmian nie będzie możliwe!",
+                            "Usuwanie dostawy", MessageDialogStyle.AffirmativeAndNegative);
+
+                if (result == MessageDialogResult.Affirmative)
+                {
+
+
+                    dataContext.DeleteSupply(SelectedSupply);
+                    Supplies = new BindableCollection<Supply>(dataContext.GetAllSupplies());
+                    //dirty hack to refresh supply list filtered by selected date
+                    SearchSupplyDate1 = SearchSupplyDate1;
+                    SearchSupplyDate2 = SearchSupplyDate2;
+                }
+
+
             }
-            
         }
 
-        public void DeleteSupplier()
+        public async void DeleteSupplier()
         {
             if (EditSupplier != null)
             {
-                dataContext.DeleteSupplier(EditSupplier);
-                Suppliers = new BindableCollection<Supplier>(dataContext.GetAllSuppliers());
+                MessageDialogResult result = await DialogService.ShowMessage("Czy jesteś pewny że chcesz usunąć wybranego dostawcę: " + EditSupplier.Name + "?\nPostepuj rozważnie, gdyż cofnięcie zmian nie będzie możliwe!\n\nJeżeli wybrany dostawca ma powiązania w bazie danych jego usunięcie nie będzie możliwe.", "Usuwanie " + EditSupplier.Name, MessageDialogStyle.AffirmativeAndNegative);
+
+                if (result == MessageDialogResult.Affirmative)
+                {
+                    try
+                    {
+                        dataContext.DeleteSupplier(EditSupplier);
+                        Suppliers = new BindableCollection<Supplier>(dataContext.GetAllSuppliers());
+                    }
+                    catch (Exception e)
+                    {
+                        DialogService.ShowMessage("Usunięcie dostawcy niemożliwe! Dostawca posiada wpisy w produktach",
+                            "Usuwanie - błąd", MessageDialogStyle.Affirmative);
+                    }
+                    
+                }
+                
             }
         }
 
@@ -291,11 +343,9 @@ namespace ecman.ViewModels
 
         public void AddNewSupplier()
         {
-            var newSupplier = new Supplier();
+            EditSupplier = new Supplier();
 
-            Suppliers.Add(newSupplier);
-
-            EditSupplier = newSupplier;
+            
 
         }
     }

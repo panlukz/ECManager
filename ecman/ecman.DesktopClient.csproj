@@ -74,6 +74,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AppBootstrapper.cs" />
+    <Compile Include="ViewModels\DialogService.cs" />
     <Compile Include="ViewModels\IShell.cs" />
     <Compile Include="ViewModels\ITab.cs" />
     <Compile Include="ViewModels\OrdersTabViewModel.cs" />

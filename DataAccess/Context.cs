@@ -15,6 +15,9 @@ namespace DataAccess
         public DbSet<Product> Products { get; set; }
         public DbSet<Supply> Supplies { get; set; }
 
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<Order> Orders { get; set; }
+
         // Your context has been configured to use a 'Context' connection string from your application's 
         // configuration file (App.config or Web.config). By default, this connection string targets the 
         // 'DataAccess.Context' database on your LocalDb instance. 

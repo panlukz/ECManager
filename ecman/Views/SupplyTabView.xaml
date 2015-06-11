@@ -39,7 +39,7 @@
                             <StackPanel Grid.Row="0" Orientation="Horizontal">
                                 <Label Margin="5, 5">Wybierz dostawcę:</Label>
                                 <ComboBox ItemsSource="{Binding Path=Suppliers, Mode=TwoWay}" Width="200"
-                              controls:TextBoxHelper.ClearTextButton="True"
+                              
                               Margin="5, 5" DisplayMemberPath="Name"
                               SelectedIndex="0" SelectedItem="{Binding Path=SelectedSupplier}" />
                                 <Label Margin="5, 5">Id:</Label>
@@ -109,7 +109,10 @@
                                         Width="50"/>
                                         <GridViewColumn DisplayMemberBinding="{Binding Name}"
                                         Header="Nazwa"
-                                        Width="200"/>
+                                        Width="140"/>
+                                        <GridViewColumn DisplayMemberBinding="{Binding Price}"
+                                        Header="Cena"
+                                        Width="60"/>
                                         <GridViewColumn DisplayMemberBinding="{Binding Category.Name}"
                                         Header="Kategoria"
                                         Width="100"/>
@@ -146,13 +149,10 @@
                                     <GridViewColumn DisplayMemberBinding="{Binding Name}"
                                         Header="Nazwa"
                                         Width="200"/>
-                                    <GridViewColumn Header="Ilość"
+                                    <GridViewColumn DisplayMemberBinding="{Binding Quantity}"
+                                        Header="Ilość"
                                         Width="100">
-                                        <GridViewColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBox Text="{Binding Path=Quantity, Mode=TwoWay}"></TextBox>
-                                            </DataTemplate>
-                                        </GridViewColumn.CellTemplate>
+                                        
                                     </GridViewColumn>
                                 </GridView>
                             </ListView.View>
@@ -174,7 +174,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition />
                         <RowDefinition />
-                        <RowDefinition />
+                        
                     </Grid.RowDefinitions>
                     
                     <GroupBox Grid.Row="0" Header="Przyjęte dostawy">
@@ -253,9 +253,7 @@
                         </ListView>
                     </GroupBox>
                     
-                    <GroupBox Grid.Row="2" Header="Podsumowanie dostawy">
-                        
-                    </GroupBox>
+                    
                     
                 </Grid>
             </controls:MetroTabItem>
@@ -292,16 +290,16 @@
                                         Width="50"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Name}"
                                         Header="Nazwa"
-                                        Width="200"/>
+                                        Width="120"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding PhoneNo}"
                                         Header="Numer telefonu"
-                                        Width="100"/>
+                                        Width="115"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Email}"
                                         Header="E-mail"
-                                        Width="100"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Address}"
-                                        Header="Adres"
-                                        Width="100"/>
+                                        Width="60"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Product.Count}"
+                                        Header="Ilość produktów"
+                                        Width="117"/>
                                 </GridView>
                             </ListView.View>
                         </ListView>

@@ -14,5 +14,7 @@ namespace DataAccess.Model
 
         public string Address { get; set; }
 
+       
+
     }
 }

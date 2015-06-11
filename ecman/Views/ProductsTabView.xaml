@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:cal="http://www.caliburnproject.org"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="1000">
     <Grid>
@@ -196,7 +197,7 @@
                             <ComboBox Grid.Row="2" Grid.Column="3" Height="25" ItemsSource="{Binding Path=Suppliers, Mode=TwoWay}" DisplayMemberPath="Name" SelectedItem="{Binding Path=EditProduct.Supplier, Mode=TwoWay}"></ComboBox>
                             
                             <Button x:Name="UpdateProduct" Grid.Row="3" Grid.ColumnSpan="4" Width="200" Margin="10,10">Zapisz edytowany produkt</Button>
-                            
+                            <Button x:Name="DeleteProduct" Grid.Row="3" Grid.Column="4" Width="180" Margin="10,10">Usuń produkt</Button>
                         </Grid>
                         
                     </GroupBox>
@@ -217,7 +218,7 @@
                       SelectedIndex="0" SelectionMode="Single" SelectedItem="{Binding Path=EditCategory}">
                                     <ListView.ContextMenu>
                                         <ContextMenu>
-                                            <MenuItem Header="Usuń kategorię..."></MenuItem>
+                                            <MenuItem Header="Usuń kategorię..." cal:Message.Attach="DeleteCategory" ></MenuItem>
                                         </ContextMenu>
 
                                     </ListView.ContextMenu>
@@ -228,7 +229,10 @@
                                         Width="50"/>
                                             <GridViewColumn DisplayMemberBinding="{Binding Name}"
                                         Header="Nazwa kategorii"
-                                        Width="300"/>
+                                        Width="120"/>
+                                            <GridViewColumn DisplayMemberBinding="{Binding Path=Product.Count}"
+                                        Header="Powiązane produkty"
+                                        Width="50"/>
                                          
                                         </GridView>
                                     </ListView.View>

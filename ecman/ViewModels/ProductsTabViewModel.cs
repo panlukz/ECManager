@@ -1,7 +1,9 @@
-﻿using System.Windows.Media;
+﻿using System;
+using System.Windows.Media;
 using Caliburn.Micro;
 using DataAccess;
 using DataAccess.Model;
+using MahApps.Metro.Controls.Dialogs;
 
 namespace ecman.ViewModels
 {
@@ -11,6 +13,8 @@ namespace ecman.ViewModels
         private Category editCategory;
         private Product editProduct;
         private int editProductId;
+        private BindableCollection<Category> categories;
+
 
 
         public ProductsTabViewModel(IData data)
@@ -24,7 +28,17 @@ namespace ecman.ViewModels
         }
 
 
-        public BindableCollection<Category> Categories { get; set; }
+
+        public BindableCollection<Category> Categories
+        {
+            get { return categories; }
+            set
+            {
+                categories = value;
+                NotifyOfPropertyChange(()=> Categories);
+            }
+        }
+        
 
         public BindableCollection<Producer> Producers { get; set; }
 
@@ -104,6 +118,31 @@ namespace ecman.ViewModels
             
         }
 
+        public async void DeleteProduct()
+        {
+            if (EditProduct != null)
+            {
+                MessageDialogResult result = await DialogService.ShowMessage("Czy jesteś pewny że chcesz usunąć wybrany produkt: " + EditProduct.Name + "?\nPostepuj rozważnie, gdyż cofnięcie zmian nie będzie możliwe!\n\nJeżeli wybrany produkt ma powiązania w bazie danych jego usunięcie nie będzie możliwe.", "Usuwanie " + EditProduct.Name, MessageDialogStyle.AffirmativeAndNegative);
+
+                if (result == MessageDialogResult.Affirmative)
+                {
+                    try
+                    {
+                        dataContext.DeleteProduct(EditProduct);
+                        Suppliers = new BindableCollection<Supplier>(dataContext.GetAllSuppliers());
+                        EditProduct = new Product();
+                    }
+                    catch (Exception e)
+                    {
+                        DialogService.ShowMessage("Usunięcie produktu niemożliwe! Produkt ma powiązania w bazie danych!",
+                            "Usuwanie - błąd", MessageDialogStyle.Affirmative);
+                    }
+
+                }
+
+            }
+        }
+
         public void UpdateProduct()
         {
             if (EditProduct != null && EditProduct.Id != 0)
@@ -114,11 +153,38 @@ namespace ecman.ViewModels
             {
                 dataContext.AddProduct(EditProduct);
             }
+
+            Categories = new BindableCollection<Category>(dataContext.GetAllCategories());
         }
 
         public void AddNewCategory()
         {
             EditCategory = new Category();
+        }
+
+        public async void DeleteCategory()
+        {
+            if (EditCategory != null)
+            {
+                MessageDialogResult result = await DialogService.ShowMessage("Czy jesteś pewny że chcesz usunąć wybraną kategorię: " + EditCategory.Name + "?\nPostepuj rozważnie, gdyż cofnięcie zmian nie będzie możliwe!\n\nJeżeli wybrana kategoria ma powiązania w bazie danych jego usunięcie nie będzie możliwe.", "Usuwanie " + EditCategory.Name, MessageDialogStyle.AffirmativeAndNegative);
+
+                if (result == MessageDialogResult.Affirmative)
+                {
+                    try
+                    {
+                        dataContext.DeleteCategory(EditCategory);
+                        Categories = new BindableCollection<Category>(dataContext.GetAllCategories());
+                        EditCategory = new Category();
+                    }
+                    catch (Exception e)
+                    {
+                        DialogService.ShowMessage("Usunięcie kategorii niemożliwe! Kategoria ma powiązania w bazie danych!",
+                            "Usuwanie - błąd", MessageDialogStyle.Affirmative);
+                    }
+
+                }
+
+            }
         }
 
         public void UpdateCategory()

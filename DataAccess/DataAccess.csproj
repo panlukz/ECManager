@@ -83,6 +83,22 @@
     <Compile Include="Migrations\201506012006436_AddDateToSupply.Designer.cs">
       <DependentUpon>201506012006436_AddDateToSupply.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201506101851598_AddCustomerANDOrder.cs" />
+    <Compile Include="Migrations\201506101851598_AddCustomerANDOrder.Designer.cs">
+      <DependentUpon>201506101851598_AddCustomerANDOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506101856235_AddCustomerANDOrder2.cs" />
+    <Compile Include="Migrations\201506101856235_AddCustomerANDOrder2.Designer.cs">
+      <DependentUpon>201506101856235_AddCustomerANDOrder2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506101858369_AddCustomerANDOrder3.cs" />
+    <Compile Include="Migrations\201506101858369_AddCustomerANDOrder3.Designer.cs">
+      <DependentUpon>201506101858369_AddCustomerANDOrder3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201506101859497_AddCustomerANDOrder4.cs" />
+    <Compile Include="Migrations\201506101859497_AddCustomerANDOrder4.Designer.cs">
+      <DependentUpon>201506101859497_AddCustomerANDOrder4.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Category.cs" />
     <Compile Include="Model\Customer.cs" />
@@ -121,6 +137,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201506012006436_AddDateToSupply.resx">
       <DependentUpon>201506012006436_AddDateToSupply.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506101851598_AddCustomerANDOrder.resx">
+      <DependentUpon>201506101851598_AddCustomerANDOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506101856235_AddCustomerANDOrder2.resx">
+      <DependentUpon>201506101856235_AddCustomerANDOrder2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506101858369_AddCustomerANDOrder3.resx">
+      <DependentUpon>201506101858369_AddCustomerANDOrder3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201506101859497_AddCustomerANDOrder4.resx">
+      <DependentUpon>201506101859497_AddCustomerANDOrder4.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
