@@ -30,6 +30,10 @@ namespace ecman.ViewModels
             this.DisplayName = "Dostawy";
 
             this.Suppliers = new BindableCollection<Supplier>(dataContext.GetAllSuppliers());
+
+            if(Suppliers.Count > 0)
+                EditSupplier = Suppliers[0];
+
             this.Supplies = new BindableCollection<Supply>(dataContext.GetAllSupplies());
             this.ProductsInSupply = new BindableCollection<Product>();
 
@@ -258,22 +262,36 @@ namespace ecman.ViewModels
 
         public void AddSupply()
         {
-            var newSupply = new Supply() { SupplierId = SelectedSupplier.Id, DeliveryDate = DateTime.Today};
 
-            foreach (Product p in ProductsInSupply)
+            if (ProductsInSupply.Count > 0)
             {
-                newSupply.Product.Add(p);
+                var newSupply = new Supply() { SupplierId = SelectedSupplier.Id, DeliveryDate = DateTime.Today };
+
+                foreach (Product p in ProductsInSupply)
+                {
+                    newSupply.Product.Add(p);
+                }
+
+                dataContext.AddSupply(newSupply);
+                Supplies = new BindableCollection<Supply>(dataContext.GetAllSupplies());
+                //dirty hack to refresh supply list filtered by selected date
+                SearchSupplyDate1 = SearchSupplyDate1;
+                SearchSupplyDate2 = SearchSupplyDate2;
+
+                DialogService.ShowMessage("Dodanie dostawy od odstawcy " + newSupply.Supplier.Name + " zakończono sukcesem!",
+                                "Dodano dostawę", MessageDialogStyle.Affirmative);
+
+                ProductsInSupply.Clear();
+            }
+            else
+            {
+                DialogService.ShowMessage("Nie można dodać dostawy bez produktów. Dodaj produkt do dostawy!",
+                                "Ostrzeżenie", MessageDialogStyle.Affirmative);
             }
 
-            dataContext.AddSupply(newSupply);
-            Supplies = new BindableCollection<Supply>(dataContext.GetAllSupplies());
-            //dirty hack to refresh supply list filtered by selected date
-            SearchSupplyDate1 = SearchSupplyDate1;
-            SearchSupplyDate2 = SearchSupplyDate2;
-
-            DialogService.ShowMessage("Dodanie dostawy od odstawcy " + newSupply.Supplier.Name + " zakończono sukcesem!",
-                            "Dodano dostawę", MessageDialogStyle.Affirmative);
             
+            
+
         }
 
         public async void DeleteSupply()
@@ -309,7 +327,7 @@ namespace ecman.ViewModels
             {
                 MessageDialogResult result = await DialogService.ShowMessage("Czy jesteś pewny że chcesz usunąć wybranego dostawcę: " + EditSupplier.Name + "?\nPostepuj rozważnie, gdyż cofnięcie zmian nie będzie możliwe!\n\nJeżeli wybrany dostawca ma powiązania w bazie danych jego usunięcie nie będzie możliwe.", "Usuwanie " + EditSupplier.Name, MessageDialogStyle.AffirmativeAndNegative);
 
-                if (result == MessageDialogResult.Affirmative)
+                if (result == MessageDialogResult.Affirmative && EditSupplier.Product.Count < 1)
                 {
                     try
                     {
@@ -323,21 +341,31 @@ namespace ecman.ViewModels
                     }
                     
                 }
+                else
+                {
+                    DialogService.ShowMessage("Usunięcie dostawcy niemożliwe! Dostawca posiada wpisy w produktach",
+                            "Usuwanie - błąd", MessageDialogStyle.Affirmative);
+                }
                 
             }
         }
 
         public void UpdateSupplier()
         {
-            if (EditSupplier != null && EditSupplier.Id != 0)
+            if (EditSupplier != null && EditSupplier.Id != 0 && !String.IsNullOrWhiteSpace(EditSupplier.Name))
             {
                 dataContext.UpdateSupplier(EditSupplier.Id, EditSupplier);
                 Suppliers = new BindableCollection<Supplier>(dataContext.GetAllSuppliers());
             }
-            else if (EditSupplier != null && EditSupplier.Id == 0)
+            else if (EditSupplier != null && EditSupplier.Id == 0 && !String.IsNullOrWhiteSpace(EditSupplier.Name))
             {
                 dataContext.AddSupplier(EditSupplier);
                 Suppliers = new BindableCollection<Supplier>(dataContext.GetAllSuppliers());
+            }
+            else
+            {
+                DialogService.ShowMessage("Wpisz przynajmniej nazwę dostawcy!",
+                            "Błąd", MessageDialogStyle.Affirmative);
             }
         }
 

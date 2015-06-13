@@ -73,7 +73,14 @@
                                   IsEditable="True" 
                                       ItemsSource="{Binding Path=Suppliers, Mode=OneWay}"
                                       DisplayMemberPath="Name"
-                                      Text="{Binding Path=QueryProductSupplier, Mode=OneWayToSource}"/>
+                                      Text="{Binding Path=QueryProductSupplier, Mode=OneWayToSource}">
+                                <ComboBox.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="Odśwież listę" cal:Message.Attach="RefreshSuppliersList" ></MenuItem>
+                                    </ContextMenu>
+
+                                </ComboBox.ContextMenu>
+                            </ComboBox>
                             
                             <Button x:Name="SearchProducts" Grid.Row="0" Grid.RowSpan="2" Grid.Column="4" >Wyszukaj produkty</Button>
                         </Grid>

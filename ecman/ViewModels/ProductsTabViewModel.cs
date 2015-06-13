@@ -14,6 +14,7 @@ namespace ecman.ViewModels
         private Product editProduct;
         private int editProductId;
         private BindableCollection<Category> categories;
+        private BindableCollection<Supplier> suppliers;
 
 
 
@@ -25,6 +26,11 @@ namespace ecman.ViewModels
             this.Categories = new BindableCollection<Category>(dataContext.GetAllCategories());
             this.Suppliers = new BindableCollection<Supplier>(dataContext.GetAllSuppliers());
             this.Producers = new BindableCollection<Producer>(dataContext.GetAllProducers());
+
+            if (Categories.Count > 0)
+                EditCategory = Categories[0];
+
+            EditProduct = new Product();
         }
 
 
@@ -42,7 +48,20 @@ namespace ecman.ViewModels
 
         public BindableCollection<Producer> Producers { get; set; }
 
-        public BindableCollection<Supplier> Suppliers { get; set; }
+        
+
+        public BindableCollection<Supplier> Suppliers
+        {
+            get { return suppliers; }
+            set
+            {
+                suppliers = value;
+                NotifyOfPropertyChange(() => Suppliers);
+            }
+        }
+        
+
+
 
         public BindableCollection<Product> ProductsFromQuery { get; set; }
 
@@ -145,13 +164,18 @@ namespace ecman.ViewModels
 
         public void UpdateProduct()
         {
-            if (EditProduct != null && EditProduct.Id != 0)
+            if (EditProduct != null && EditProduct.Id != 0 && EditProduct.Category != null && EditProduct.Producer != null && EditProduct.Supplier != null)
             {
                 dataContext.UpdateProduct(EditProduct);
             }
-            else if (EditProduct != null && EditProduct.Id == 0)
+            else if (EditProduct != null && EditProduct.Id == 0 && EditProduct.Category != null && EditProduct.Producer != null && EditProduct.Supplier != null)
             {
                 dataContext.AddProduct(EditProduct);
+            }
+            else
+            {
+                DialogService.ShowMessage("Uzupełnij wszystkie pola!",
+                            "Błąd", MessageDialogStyle.Affirmative);
             }
 
             Categories = new BindableCollection<Category>(dataContext.GetAllCategories());
@@ -189,19 +213,34 @@ namespace ecman.ViewModels
 
         public void UpdateCategory()
         {
-            if (EditCategory != null && EditCategory.Id != 0)
+            if (EditCategory != null && EditCategory.Id != 0 && !String.IsNullOrWhiteSpace(EditCategory.Name))
             {
                 dataContext.UpdateCategory(EditCategory);
-                this.Categories = new BindableCollection<Category>(dataContext.GetAllCategories());
-                NotifyOfPropertyChange(() => Categories);
+               
             }
-            else if (EditCategory != null && EditCategory.Id == 0)
+            else if (EditCategory != null && EditCategory.Id == 0 && !String.IsNullOrWhiteSpace(EditCategory.Name))
             {
                 dataContext.AddCategory(EditCategory);
-                this.Categories = new BindableCollection<Category>(dataContext.GetAllCategories());
-                NotifyOfPropertyChange(() => Categories);
+                
 
             }
+            else
+            {
+                DialogService.ShowMessage("Wpisz nazwę kategorii",
+                            "Błąd", MessageDialogStyle.Affirmative);
+                
+            }
+
+            
+            this.Categories = new BindableCollection<Category>(dataContext.GetAllCategories());
+            NotifyOfPropertyChange(() => Categories);
+            
+        }
+
+        public void RefreshSuppliersList()
+        {
+            Suppliers = new BindableCollection<Supplier>(dataContext.GetAllSuppliers());
+
         }
     }
 }

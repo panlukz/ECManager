@@ -22,7 +22,7 @@ namespace ecman {
             container.Singleton<IData, Data>();
             container.PerRequest<IShell, ShellViewModel>();
             container.PerRequest<ITab, SupplyTabViewModel>();
-            container.PerRequest<ITab, OrdersTabViewModel>();
+            //container.PerRequest<ITab, OrdersTabViewModel>();
             container.PerRequest<ITab, ProductsTabViewModel>();
         }
 
