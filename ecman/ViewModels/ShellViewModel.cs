@@ -12,7 +12,7 @@ namespace ecman.ViewModels
     {
         public ShellViewModel(IEnumerable<ITab> tabItems)
         {
-            this.DisplayName = "ECMAN BETA";
+            this.DisplayName = "E-Commerce Manager BETA";
             Items.AddRange(tabItems);
 
         }
