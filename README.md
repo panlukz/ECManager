@@ -1,4 +1,4 @@
-# ECManager
+ECManager
 ===========
 
 ----
