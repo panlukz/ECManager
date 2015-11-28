@@ -1,15 +1,18 @@
 # ECManager
 ===========
+
+----
 ECManager jest częścią aplikacji do zarządzania sklepem internetowym.
 Zawiera moduł obsługi dostaw oraz zarządzania produktami.
 
+----
 ECManager is a part of e-commerce managament application. 
-It contain delivery and product management modules.
+It contains delivery and product management modules.
 
-Wykorzystano:
+Technologies:
 * .net c#
 * wpf
 * mvvm
 * entity framework
-* caliburn.micro
-* MahApps.Metro
+* caliburn.micro https://github.com/Caliburn-Micro/Caliburn.Micro
+* MahApps.Metro https://github.com/MahApps/MahApps.Metro
