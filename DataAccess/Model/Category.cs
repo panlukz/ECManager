@@ -11,7 +11,7 @@ namespace DataAccess.Model
     {
         public Category()
         {
-
+            Product = new HashSet<Product>();
         }
 
         [Key]

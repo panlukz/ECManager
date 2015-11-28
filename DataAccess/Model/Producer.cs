@@ -9,6 +9,12 @@ namespace DataAccess.Model
 {
     public class Producer
     {
+
+        public Producer()
+        {
+            Product = new HashSet<Product>();
+        }
+
         [Key]
         public int Id { get; set; }
 
