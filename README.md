@@ -18,3 +18,5 @@ Technologies:
 * entity framework
 * caliburn.micro https://github.com/Caliburn-Micro/Caliburn.Micro
 * MahApps.Metro https://github.com/MahApps/MahApps.Metro
+
+Video: https://www.youtube.com/watch?v=2Qyp49i-2Hk
