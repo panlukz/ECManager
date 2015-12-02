@@ -11,6 +11,15 @@ eng
 ECManager is a part of e-commerce managament application. 
 It contains delivery and product management modules.
 
+How to recreate database?
+---
+Open Nuget Package Manager and enter as follows:
+* Enable-Migration -Project DataAccess
+* Add-Migration init -Project DataAccess
+* Update-Database -Project DataAccess
+
+You can also use a sql script located in insert_data_sql folder. Run it as a 'New query' on created local database.
+
 Technologies:
 * .net c#
 * wpf
