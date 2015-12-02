@@ -51,55 +51,6 @@
     <Compile Include="Context.cs" />
     <Compile Include="Data.cs" />
     <Compile Include="IData.cs" />
-    <Compile Include="Migrations\201505311721257_InitialCreate.cs" />
-    <Compile Include="Migrations\201505311721257_InitialCreate.Designer.cs">
-      <DependentUpon>201505311721257_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201505311735116_First.cs" />
-    <Compile Include="Migrations\201505311735116_First.Designer.cs">
-      <DependentUpon>201505311735116_First.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201505311742295_AddProducerAndSupplier.cs" />
-    <Compile Include="Migrations\201505311742295_AddProducerAndSupplier.Designer.cs">
-      <DependentUpon>201505311742295_AddProducerAndSupplier.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201505311803540_AddSupply.cs" />
-    <Compile Include="Migrations\201505311803540_AddSupply.Designer.cs">
-      <DependentUpon>201505311803540_AddSupply.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201505311810591_AddSupply1.cs" />
-    <Compile Include="Migrations\201505311810591_AddSupply1.Designer.cs">
-      <DependentUpon>201505311810591_AddSupply1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201505311940123_Update-Supplier.cs" />
-    <Compile Include="Migrations\201505311940123_Update-Supplier.Designer.cs">
-      <DependentUpon>201505311940123_Update-Supplier.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201505311943453_AddEmailToSupplier.cs" />
-    <Compile Include="Migrations\201505311943453_AddEmailToSupplier.Designer.cs">
-      <DependentUpon>201505311943453_AddEmailToSupplier.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201506012006436_AddDateToSupply.cs" />
-    <Compile Include="Migrations\201506012006436_AddDateToSupply.Designer.cs">
-      <DependentUpon>201506012006436_AddDateToSupply.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201506101851598_AddCustomerANDOrder.cs" />
-    <Compile Include="Migrations\201506101851598_AddCustomerANDOrder.Designer.cs">
-      <DependentUpon>201506101851598_AddCustomerANDOrder.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201506101856235_AddCustomerANDOrder2.cs" />
-    <Compile Include="Migrations\201506101856235_AddCustomerANDOrder2.Designer.cs">
-      <DependentUpon>201506101856235_AddCustomerANDOrder2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201506101858369_AddCustomerANDOrder3.cs" />
-    <Compile Include="Migrations\201506101858369_AddCustomerANDOrder3.Designer.cs">
-      <DependentUpon>201506101858369_AddCustomerANDOrder3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201506101859497_AddCustomerANDOrder4.cs" />
-    <Compile Include="Migrations\201506101859497_AddCustomerANDOrder4.Designer.cs">
-      <DependentUpon>201506101859497_AddCustomerANDOrder4.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Category.cs" />
     <Compile Include="Model\Customer.cs" />
     <Compile Include="Model\Order.cs" />
@@ -112,44 +63,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201505311721257_InitialCreate.resx">
-      <DependentUpon>201505311721257_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201505311735116_First.resx">
-      <DependentUpon>201505311735116_First.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201505311742295_AddProducerAndSupplier.resx">
-      <DependentUpon>201505311742295_AddProducerAndSupplier.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201505311803540_AddSupply.resx">
-      <DependentUpon>201505311803540_AddSupply.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201505311810591_AddSupply1.resx">
-      <DependentUpon>201505311810591_AddSupply1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201505311940123_Update-Supplier.resx">
-      <DependentUpon>201505311940123_Update-Supplier.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201505311943453_AddEmailToSupplier.resx">
-      <DependentUpon>201505311943453_AddEmailToSupplier.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201506012006436_AddDateToSupply.resx">
-      <DependentUpon>201506012006436_AddDateToSupply.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201506101851598_AddCustomerANDOrder.resx">
-      <DependentUpon>201506101851598_AddCustomerANDOrder.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201506101856235_AddCustomerANDOrder2.resx">
-      <DependentUpon>201506101856235_AddCustomerANDOrder2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201506101858369_AddCustomerANDOrder3.resx">
-      <DependentUpon>201506101858369_AddCustomerANDOrder3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201506101859497_AddCustomerANDOrder4.resx">
-      <DependentUpon>201506101859497_AddCustomerANDOrder4.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
