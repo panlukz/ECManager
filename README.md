@@ -13,8 +13,8 @@ It contains delivery and product management modules.
 
 How to re-create database?
 ---
-Open Nuget Package Manager and enter as follows:
-* Enable-Migration -Project DataAccess
+Open Nuget Package Manager Console and enter as follows:
+* Enable-Migratiosn -Project DataAccess
 * Add-Migration init -Project DataAccess
 * Update-Database -Project DataAccess
 
