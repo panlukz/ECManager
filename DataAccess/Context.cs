@@ -1,3 +1,4 @@
+using System.Data.Entity.ModelConfiguration.Conventions;
 using DataAccess.Model;
 
 namespace DataAccess
@@ -8,6 +9,11 @@ namespace DataAccess
 
     public class Context : DbContext
     {
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+            modelBuilder.Conventions.Remove<ManyToManyCascadeDeleteConvention>();
+        }
 
         public DbSet<Category> Categories { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
