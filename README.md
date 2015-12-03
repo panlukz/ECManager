@@ -18,6 +18,8 @@ Open Nuget Package Manager Console and enter as follows:
 * Add-Migration init -Project DataAccess
 * Update-Database -Project DataAccess
 
+If you get an error with message: "Enable-Migrations : The term 'Enable-Migrations' is not recognized as the name of a cmdlet", just close Visual Studio and open project again.
+
 You can also use a sql script with sample data. It's located in insert_data_sql folder. Run it as a 'New query' on created local database.
 
 Technologies:
