@@ -13,7 +13,7 @@ namespace DataAccess
 
         public Data()
         {
-            this.context = new Context();
+            context = new Context();
         }
 
         public ICollection<Product> GetProductsFromSupplier(int supplierId)
