@@ -18,17 +18,17 @@ namespace DataAccess
 
         public ICollection<Product> GetProductsFromSupplier(int supplierId)
         {
-            return context.Products.Where(p => p.SupplierId == supplierId).ToArray();
+            return context.Products.Where(p => p.SupplierId == supplierId).ToList();
         }
 
         public ICollection<Product> GetAllProducts()
         {
-            return context.Products.ToArray();
+            return context.Products.ToList();
         }
 
         public ICollection<Supplier> GetAllSuppliers()
         {
-            return context.Suppliers.ToArray();
+            return context.Suppliers.ToList();
         }
 
         public ICollection<Supply> GetAllSupplies()
@@ -82,7 +82,7 @@ namespace DataAccess
 
         public void UpdateProduct(Product newProduct)
         {
-            Product oldProduct = context.Products.Single(p => p.Id == newProduct.Id);
+            var oldProduct = context.Products.Single(p => p.Id == newProduct.Id);
 
             oldProduct.Name = newProduct.Name;
             oldProduct.Price = newProduct.Price;
@@ -118,7 +118,7 @@ namespace DataAccess
 
         public void UpdateCategory(Category category)
         {
-            Category oldCategory = context.Categories.Single(c => c.Id == category.Id);
+            var oldCategory = context.Categories.Single(c => c.Id == category.Id);
 
             oldCategory.Name = category.Name;
 
