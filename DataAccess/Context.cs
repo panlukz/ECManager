@@ -1,11 +1,9 @@
 using System.Data.Entity.ModelConfiguration.Conventions;
+using System.Data.Entity;
 using DataAccess.Model;
 
 namespace DataAccess
 {
-    using System;
-    using System.Data.Entity;
-    using System.Linq;
 
     public class Context : DbContext
     {

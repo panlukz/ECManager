@@ -1,10 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using Caliburn.Micro;
-using DataAccess;
-using DataAccess.Model;
-
 
 namespace ecman.ViewModels
 {

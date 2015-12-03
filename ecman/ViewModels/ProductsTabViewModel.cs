@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Windows.Media;
 using Caliburn.Micro;
 using DataAccess;
 using DataAccess.Model;
