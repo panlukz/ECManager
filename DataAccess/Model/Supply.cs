@@ -11,7 +11,7 @@ namespace DataAccess.Model
 
         public Supply()
         {
-            this.Product = new HashSet<Product>();
+            Product = new HashSet<Product>();
         }
 
         [Key]

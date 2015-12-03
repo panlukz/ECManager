@@ -4,7 +4,7 @@
     {
         public OrdersTabViewModel()
         {
-            this.DisplayName = "Zamówienia";
+            DisplayName = "Zamówienia";
         }
     }
 }

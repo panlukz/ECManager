@@ -19,12 +19,12 @@ namespace ecman.ViewModels
 
         public ProductsTabViewModel(IData data)
         {
-            this.dataContext = data;
-            this.DisplayName = "Produkty";
+            dataContext = data;
+            DisplayName = "Produkty";
 
-            this.Categories = new BindableCollection<Category>(dataContext.GetAllCategories());
-            this.Suppliers = new BindableCollection<Supplier>(dataContext.GetAllSuppliers());
-            this.Producers = new BindableCollection<Producer>(dataContext.GetAllProducers());
+            Categories = new BindableCollection<Category>(dataContext.GetAllCategories());
+            Suppliers = new BindableCollection<Supplier>(dataContext.GetAllSuppliers());
+            Producers = new BindableCollection<Producer>(dataContext.GetAllProducers());
 
             if (Categories.Count > 0)
                 EditCategory = Categories[0];
@@ -231,7 +231,7 @@ namespace ecman.ViewModels
             }
 
             
-            this.Categories = new BindableCollection<Category>(dataContext.GetAllCategories());
+            Categories = new BindableCollection<Category>(dataContext.GetAllCategories());
             NotifyOfPropertyChange(() => Categories);
             
         }

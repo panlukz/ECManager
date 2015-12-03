@@ -25,18 +25,18 @@ namespace ecman.ViewModels
 
         public SupplyTabViewModel(IData data)
         {
-            this.dataContext = data;
-            this.DisplayName = "Dostawy";
+            dataContext = data;
+            DisplayName = "Dostawy";
 
-            this.Suppliers = new BindableCollection<Supplier>(dataContext.GetAllSuppliers());
+            Suppliers = new BindableCollection<Supplier>(dataContext.GetAllSuppliers());
 
             if(Suppliers.Count > 0)
                 EditSupplier = Suppliers[0];
 
-            this.Supplies = new BindableCollection<Supply>(dataContext.GetAllSupplies());
-            this.ProductsInSupply = new BindableCollection<Product>();
+            Supplies = new BindableCollection<Supply>(dataContext.GetAllSupplies());
+            ProductsInSupply = new BindableCollection<Product>();
 
-            this.suppliesListView = new  ListCollectionView(Supplies);
+            suppliesListView = new  ListCollectionView(Supplies);
         }
 
        
@@ -61,7 +61,7 @@ namespace ecman.ViewModels
             {
                 supplies = value;
                 NotifyOfPropertyChange(() => Supplies);
-                this.suppliesListView = new ListCollectionView(Supplies);
+                suppliesListView = new ListCollectionView(Supplies);
                 NotifyOfPropertyChange(() => SuppliesListView);
             }
         }
@@ -70,7 +70,7 @@ namespace ecman.ViewModels
         private ListCollectionView productListView;
         public ICollectionView ProductListView
         {
-            get { return this.productListView; }
+            get { return productListView; }
         }
 
         private string searchProductName;
@@ -94,7 +94,7 @@ namespace ecman.ViewModels
         private ListCollectionView suppliesListView;
         public ICollectionView SuppliesListView
         {
-            get { return this.suppliesListView; }
+            get { return suppliesListView; }
         }
 
 
@@ -140,12 +140,12 @@ namespace ecman.ViewModels
             set
             {
                 selectedSupplier = value;
-                this.ProductsFromSelectedSupplier = 
+                ProductsFromSelectedSupplier = 
                     new BindableCollection<Product>(dataContext.GetProductsFromSupplier(selectedSupplier.Id));
                 NotifyOfPropertyChange(() => SelectedSupplier);
                 NotifyOfPropertyChange(() => ProductsFromSelectedSupplier);
 
-                this.productListView = new ListCollectionView(ProductsFromSelectedSupplier);
+                productListView = new ListCollectionView(ProductsFromSelectedSupplier);
                 NotifyOfPropertyChange(() => ProductListView);
 
                 if (ProductsInSupply.Count > 0)

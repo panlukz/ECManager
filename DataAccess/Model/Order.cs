@@ -9,7 +9,7 @@ namespace DataAccess.Model
 
         public Order()
         {
-            this.Product = new HashSet<Product>();
+            Product = new HashSet<Product>();
         }
 
         [Key]
