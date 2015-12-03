@@ -11,12 +11,9 @@ namespace ecman.ViewModels
            string message, string title, MessageDialogStyle dialogStyle)
             {
                 var metroWindow = (Application.Current.MainWindow as MetroWindow);
-           if (metroWindow != null)
-           {
-               metroWindow.MetroDialogOptions.ColorScheme = MetroDialogColorScheme.Accented;
-               return await metroWindow.ShowMessageAsync(
-                   title, message, dialogStyle, metroWindow.MetroDialogOptions);
-           }
+                metroWindow.MetroDialogOptions.ColorScheme = MetroDialogColorScheme.Accented;
+                return await metroWindow.ShowMessageAsync(
+                    title, message, dialogStyle, metroWindow.MetroDialogOptions);
             } 
     }
 }
