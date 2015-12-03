@@ -11,7 +11,7 @@ namespace ecman.ViewModels
 {
     public class SupplyTabViewModel : TabViewModelBase
     {
-        private IData dataContext;
+        private readonly IData dataContext;
         private Supplier selectedSupplier;
         private Product selectedProduct;
         private int productQuantity = 1;

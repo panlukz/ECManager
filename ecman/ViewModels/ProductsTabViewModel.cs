@@ -8,7 +8,7 @@ namespace ecman.ViewModels
 {
     public class ProductsTabViewModel : TabViewModelBase
     {
-        private IData dataContext;
+        private readonly IData dataContext;
         private Category editCategory;
         private Product editProduct;
         private int editProductId;
